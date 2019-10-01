@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+    <div class="form-group blu-margin">
+        <select class="form-control" id="dropColumns">
+            <option value="" selected="selected" hidden="hidden">Wybierz kolumnę</option>
+            <option value="kolumna1">kolumna1</option>
+            <option value="kolumna2">kolumna2</option>
+            <option value="kolumna3">kolumna3</option>
+            <option value="kolumna4">kolumna4</option>
+        </select>
+    </div>
+
+    <div id="results">
+        <div th:fragment="columns">
+<-- fragmenty w thymeleaf-->
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script th:inline="javascript">
+        $("#dropColumns").on("change", () => {
+        const pickedColumn = $("#dropColumns option:selected").val();
+        if(pickedColumn) {
+            console.log("works: " + pickedColumn);
+
+            $.ajax(
+            {
+                type: "get",
+                url: "/columns",
+                data: {columnName: pickedColumn},
+                success: (response) => {
+                    console.log(response);
+                    $("#results").html(response);
+
+                }
+            }
+            );
+        }
+        });
+    </script>
+</body>
+</html>

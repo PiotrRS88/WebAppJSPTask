@@ -1,6 +1,7 @@
-package entity;
+package com.taskwebapp.entity;
 
-public class Columns {
+public class ColumnEntity {
+    //ColumnEntity
     int id;
     String kolumna1;
     String kolumna2;
