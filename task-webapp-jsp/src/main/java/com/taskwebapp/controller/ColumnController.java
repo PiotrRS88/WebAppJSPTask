@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -22,11 +23,10 @@ public class ColumnController {
     }
 
     @GetMapping("/columns")
-    public ModelAndView getColumns(String columnName) {
+    public ModelAndView getColumns(String columnName, @RequestParam(defaultValue = "false") Boolean unique) {
         ModelAndView modelAndView = new ModelAndView("column-board::columns");
-        List<ColumnEntity> allColumns = columnService.findAll(columnName);
+        List<ColumnEntity> allColumns = columnService.findAllByParam(columnName, unique);
         modelAndView.addObject("columns", allColumns);
-        System.out.println(allColumns.size());
         return modelAndView;
     }
 }

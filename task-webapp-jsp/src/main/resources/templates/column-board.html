@@ -1,44 +1,67 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+
+</style>
 <body>
-    <div class="form-group blu-margin">
-        <select class="form-control" id="dropColumns">
-            <option value="" selected="selected" hidden="hidden">Wybierz kolumnę</option>
-            <option value="kolumna1">kolumna1</option>
-            <option value="kolumna2">kolumna2</option>
-            <option value="kolumna3">kolumna3</option>
-            <option value="kolumna4">kolumna4</option>
-        </select>
+<div class="form-group blu-margin">
+    <select class="form-control" id="dropColumns">
+        <option value="" selected="selected" hidden="hidden">Wybierz kolumnę</option>
+        <option value="kolumna1">kolumna1</option>
+        <option value="kolumna2">kolumna2</option>
+        <option value="kolumna3">kolumna3</option>
+        <option value="kolumna4">kolumna4</option>
+    </select>
+    <label>
+        <input id="uniqueness" type="checkbox"/>
+        Unikatowe wiersze
+    </label>
+</div>
+
+<div id="results">
+    <div th:fragment="columns">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Kolumna1</th>
+                <th>Kolumna2</th>
+                <th>Kolumna3</th>
+                <th>Kolumna4</th>
+            </tr>
+            <tr th:each="column : ${columns}">
+                <td><span th:text="${column.id}"></span></td>
+                <td><span th:text="${column.kolumna1}"></span></td>
+                <td><span th:text="${column.kolumna2}"></span></td>
+                <td><span th:text="${column.kolumna3}"></span></td>
+                <td><span th:text="${column.kolumna4}"></span></td>
+            </tr>
+        </table>
     </div>
-
-    <div id="results">
-        <div th:fragment="columns">
-<-- fragmenty w thymeleaf-->
-        </div>
-    </div>
+</div>
 
 
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script th:inline="javascript">
-        $("#dropColumns").on("change", () => {
-        const pickedColumn = $("#dropColumns option:selected").val();
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script th:inline="javascript">
+    function requestData() {
+            const pickedColumn = $("#dropColumns option:selected").val();
+            const isUnique = document.querySelector("#uniqueness").checked;
         if(pickedColumn) {
-            console.log("works: " + pickedColumn);
-
             $.ajax(
             {
                 type: "get",
                 url: "/columns",
-                data: {columnName: pickedColumn},
-                success: (response) => {
-                    console.log(response);
-                    $("#results").html(response);
-
-                }
+                data: {columnName: pickedColumn, unique: isUnique},
+                success: (response) => $("#results").html(response)
             }
             );
         }
-        });
-    </script>
+    }
+
+    $("#dropColumns").on("change", requestData);
+    $("#uniqueness").on("change", requestData);
+
+</script>
 </body>
 </html>
