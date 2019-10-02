@@ -1,9 +1,9 @@
-package com.taskwebapp.dao;
+package com.taskwebapp.service;
 
 import com.taskwebapp.entity.ColumnEntity;
 
 import java.util.List;
 
-public interface ColumnsDao {
+public interface ColumnService {
     List<ColumnEntity> findAll(String columnName);
 }

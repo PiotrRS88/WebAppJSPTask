@@ -1,17 +1,17 @@
 package com.taskwebapp.dao;
 
 import com.taskwebapp.entity.ColumnEntity;
-import com.taskwebapp.mapper.ColumnsRowMapper;
+import com.taskwebapp.mapper.ColumnRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class ColumnsDaoImpl implements ColumnsDao {
+public class ColumnDaoImpl implements ColumnDao {
     NamedParameterJdbcTemplate template;
 
-    public ColumnsDaoImpl(NamedParameterJdbcTemplate template){
+    public ColumnDaoImpl(NamedParameterJdbcTemplate template){
         this.template = template;
     }
 
@@ -23,6 +23,6 @@ public class ColumnsDaoImpl implements ColumnsDao {
                 "                      FROM tabela_testowa \n" +
                 "                      GROUP BY " + columnName + " \n" +
                 "                      HAVING COUNT(" + columnName +") > 1);";
-        return template.query(sql, new ColumnsRowMapper());
+        return template.query(sql, new ColumnRowMapper());
     }
 }

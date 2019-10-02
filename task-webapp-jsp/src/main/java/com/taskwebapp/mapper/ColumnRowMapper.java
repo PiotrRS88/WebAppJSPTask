@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ColumnsRowMapper implements RowMapper<ColumnEntity> {
+public class ColumnRowMapper implements RowMapper<ColumnEntity> {
     @Override
     public ColumnEntity mapRow(ResultSet resultSet, int i) throws SQLException {
         ColumnEntity columnEntity = new ColumnEntity();
