@@ -1,14 +1,14 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-<style>
-    table, th, td {
-        border: 1px solid black;
-    }
-
-</style>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+</head>
 <body>
 <div class="form-group blu-margin">
     <select class="form-control" id="dropColumns">
-        <option value="" selected="selected" hidden="hidden">Wybierz kolumnę</option>
+        <option value="" selected="selected" hidden="hidden">Kliknij aby wybrać kolumnę</option>
         <option value="kolumna1">kolumna1</option>
         <option value="kolumna2">kolumna2</option>
         <option value="kolumna3">kolumna3</option>
@@ -18,46 +18,57 @@
         <input id="uniqueness" type="checkbox"/>
         Unikatowe wiersze
     </label>
-</div>
 
+</div>
 <div id="results">
     <div th:fragment="columns">
-        <table>
+        <table class="table table-striped table-dark">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>Kolumna1</th>
-                <th>Kolumna2</th>
-                <th>Kolumna3</th>
-                <th>Kolumna4</th>
+                <th scope="col">Id</th>
+                <th scope="col">Kolumna1</th>
+                <th scope="col">Kolumna2</th>
+                <th scope="col">Kolumna3</th>
+                <th scope="col">Kolumna4</th>
             </tr>
+            </thead>
+            <tbody>
             <tr th:each="column : ${columns}">
-                <td><span th:text="${column.id}"></span></td>
-                <td><span th:text="${column.kolumna1}"></span></td>
-                <td><span th:text="${column.kolumna2}"></span></td>
-                <td><span th:text="${column.kolumna3}"></span></td>
-                <td><span th:text="${column.kolumna4}"></span></td>
+                <td scope="row"><span th:text="${column.id}"></span></td>
+                <td scope="row"><span th:text="${column.kolumna1}"></span></td>
+                <td scope="row"><span th:text="${column.kolumna2}"></span></td>
+                <td scope="row"><span th:text="${column.kolumna3}"></span></td>
+                <td scope="row"><span th:text="${column.kolumna4}"></span></td>
             </tr>
+            </tbody>
         </table>
     </div>
 </div>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
 <script th:inline="javascript">
-    function requestData() {
-            const pickedColumn = $("#dropColumns option:selected").val();
-            const isUnique = document.querySelector("#uniqueness").checked;
-        if(pickedColumn) {
-            $.ajax(
-            {
-                type: "get",
-                url: "/columns",
-                data: {columnName: pickedColumn, unique: isUnique},
-                success: (response) => $("#results").html(response)
+            function requestData() {
+                const pickedColumn = $("#dropColumns option:selected").val();
+                const isUnique = document.querySelector("#uniqueness").checked;
+             if(pickedColumn) {
+                $.ajax(
+                    {
+                    type: "get",
+                    url: "/columns",
+                    data: {columnName: pickedColumn, unique: isUnique},
+                    success: (response) => $("#results").html(response)
+                    }
+                );
+              }
             }
-            );
-        }
-    }
 
     $("#dropColumns").on("change", requestData);
     $("#uniqueness").on("change", requestData);
