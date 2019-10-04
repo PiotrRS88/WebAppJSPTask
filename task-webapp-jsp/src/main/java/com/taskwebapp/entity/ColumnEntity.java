@@ -7,7 +7,6 @@ public class ColumnEntity {
     String kolumna3;
     int kolumna4;
 
-
     public int getId() {
         return id;
     }
@@ -46,5 +45,16 @@ public class ColumnEntity {
 
     public void setKolumna4(int kolumna4) {
         this.kolumna4 = kolumna4;
+    }
+
+    @Override
+    public String toString() {
+        return "ColumnEntity{" +
+                "id=" + id +
+                ", kolumna1='" + kolumna1 + '\'' +
+                ", kolumna2='" + kolumna2 + '\'' +
+                ", kolumna3='" + kolumna3 + '\'' +
+                ", kolumna4=" + kolumna4 +
+                '}';
     }
 }
