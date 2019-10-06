@@ -1,8 +1,5 @@
 package com.taskwebapp.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 public class ColumnEntity {
     int id;
     String kolumna1;
