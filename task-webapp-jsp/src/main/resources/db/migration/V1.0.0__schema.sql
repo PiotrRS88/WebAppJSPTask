@@ -1,4 +1,4 @@
-CREATE TABLE tabela_testowa (
+create TABLE tabela_testowa (
     id bigint NOT NULL PRIMARY KEY,
     kolumna1 character varying(256),
     kolumna2 character varying(256),
