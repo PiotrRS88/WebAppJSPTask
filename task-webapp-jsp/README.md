@@ -1,10 +1,10 @@
-##Aplikacja webowa pobierająca dane z zewnętrznej bazy danych.
+## Aplikacja webowa pobierająca dane z zewnętrznej bazy danych.
 Użytkownik wybiera z rozwijanej listy nazwę kolumny z zewnętrznej bazy danych. Po wybraniu zostaje wykonane zapytanie do bazy danych, zwracające unikalne lub powtarzające się krotki (w zależności od zaznaczenia w checkboxie). Wynik jest prezentowany bez konieczności przeładowania strony.
 
-###Użyte technologie:
+### Użyte technologie:
 Java 8, Spring Boot, JavaScript, jpa, Thymeleaf, Bootstrap, jQuery, AJAX, Postgresql, Flyway do migracji bazy danych, jUnit 5
 
-###Uruchomienie aplikacji
+### Uruchomienie aplikacji
 1. Przygotowanie bazy danych:
     - konfiguracja w aplikacji (plik application.properties)
     - flyway uruchamia się automatycznie przy starcie aplikacji.
